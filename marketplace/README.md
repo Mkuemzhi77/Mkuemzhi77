@@ -1,7 +1,7 @@
 # P2P Market
 
 > Учебный **P2P-маркетплейс цифровых товаров** (аналог Steam Community Market / Buff).  
-> Проект оформлен по тому же рабочему процессу, что и **LATAN**: GitLab, CI/CD, roadmap, docs-first.
+> Docs-first: GitLab, CI/CD, roadmap, code review.
 
 ![status](https://img.shields.io/badge/status-planning-yellow)
 ![stack](https://img.shields.io/badge/backend-FastAPI-009688)
@@ -105,7 +105,7 @@ docker compose up -d --build
 
 ---
 
-## GitLab workflow (как в LATAN)
+## GitLab workflow
 
 ```text
 issue → feature branch → Merge Request → CI (lint/test) → review → merge в main

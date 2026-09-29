@@ -57,7 +57,7 @@ UI buy click
 | Очереди | нет | синхронный buy для MVP |
 | Realtime | этап 6 | после MVP |
 
-## Деплой (целевой, как LATAN)
+## Деплой (целевой)
 
 ```text
 GitLab CI

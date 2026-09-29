@@ -1,6 +1,6 @@
 # Contributing — P2P Market
 
-Процесс как в **LATAN**: issue → ветка → MR → CI → review → merge.
+Процесс: issue → ветка → MR → CI → review → merge.
 
 ---
 
