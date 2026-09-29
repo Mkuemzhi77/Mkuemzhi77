@@ -8,24 +8,20 @@
 
 ## Перенос на GitLab (этап 0)
 
-1. Создай **новый пустой** проект на GitLab (без README/LICENSE — чтобы не было конфликта).
-2. Скопируй URL вида `https://gitlab.com/<group>/<project>.git` или SSH.
-3. Из каталога `marketplace/`:
+Репозиторий: https://gitlab.com/myvibe-group/marketplacep2p
+
+Каркас уже запушен в `main`. Дальше:
+
+1. Settings → Repository → **Protected branches**: `main` (no direct push)
+2. Invite members — одногруппник (Maintainer)
+3. Issues / Milestones: `M0 Planning` … `M4 MVP` (см. ROADMAP)
+4. CI/CD Variables позже: `DATABASE_URL`, `JWT_SECRET`
+
+Повторный пуш содержимого этой папки как корня:
 
 ```bash
-./scripts/push-to-gitlab.sh git@gitlab.com:<group>/<project>.git
+./scripts/push-to-gitlab.sh https://oauth2:<TOKEN>@gitlab.com/myvibe-group/marketplacep2p.git
 ```
-
-Скрипт выгружает содержимое папки как **корень** нового репозитория.
-
-Рекомендуемый способ для пары: один создаёт GitLab-проект, добавляет второго Maintainer, пушите только `marketplace/` как корень.
-
-### GitLab settings после первого push
-
-- Settings → Repository → **Protected branches**: `main` (no direct push)
-- Settings → CI/CD → **Variables**: позже `DATABASE_URL`, `JWT_SECRET`
-- Settings → Merge requests: pipeline success + 1 approval (по желанию)
-- Issues / Milestones: `M0 Planning` … `M4 MVP` (см. ROADMAP)
 
 ## Запуск (целевой)
 

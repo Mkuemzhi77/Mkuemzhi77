@@ -106,8 +106,10 @@ docker compose up -d --build
 Быстрый пуш содержимого этой папки как корня GitLab-репо:
 
 ```bash
-./scripts/push-to-gitlab.sh git@gitlab.com:<group>/<project>.git
+./scripts/push-to-gitlab.sh https://gitlab.com/myvibe-group/marketplacep2p.git
 ```
+
+Проект: https://gitlab.com/myvibe-group/marketplacep2p
 
 ---
 
