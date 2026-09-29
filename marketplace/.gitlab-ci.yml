@@ -1,7 +1,5 @@
 # Stage 0 CI — docs check only.
-# Backend/test/build jobs will be added when backend code exists.
-# If pipeline fails with 0 jobs: enable Shared Runners and/or verify
-# your GitLab.com account (phone) — required for CI minutes on free tier.
+# Backend jobs will be added when backend code exists.
 
 stages:
   - lint
@@ -10,7 +8,7 @@ lint:docs:
   stage: lint
   image: alpine:3.20
   script:
-    - echo "Stage 0: checking docs"
+    - echo "Stage 0 checking docs"
     - test -f README.md
     - test -f ROADMAP.md
     - test -f CONTRIBUTING.md
@@ -18,4 +16,4 @@ lint:docs:
     - test -f docs/domain.md
     - test -f docs/api.md
     - test -f docs/setup.md
-    - echo "OK"
+    - echo OK
