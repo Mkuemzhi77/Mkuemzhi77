@@ -6,18 +6,26 @@
 - Git
 - (опционально) Python 3.12, Node 20 — для запуска без контейнера API/UI
 
-## GitLab remote
+## Перенос на GitLab (этап 0)
 
-После создания проекта в GitLab:
+1. Создай **новый пустой** проект на GitLab (без README/LICENSE — чтобы не было конфликта).
+2. Скопируй URL вида `https://gitlab.com/<group>/<project>.git` или SSH.
+3. Из каталога `marketplace/`:
 
 ```bash
-cd marketplace
-git remote add gitlab git@gitlab.com:<group>/<project>.git
-git push -u gitlab main
+./scripts/push-to-gitlab.sh git@gitlab.com:<group>/<project>.git
 ```
 
-Protected branch `main`: Settings → Repository → Protected branches  
-CI variables: Settings → CI/CD → Variables (`DATABASE_URL`, `JWT_SECRET`, …)
+Скрипт выгружает содержимое папки как **корень** нового репозитория.
+
+Рекомендуемый способ для пары: один создаёт GitLab-проект, добавляет второго Maintainer, пушите только `marketplace/` как корень.
+
+### GitLab settings после первого push
+
+- Settings → Repository → **Protected branches**: `main` (no direct push)
+- Settings → CI/CD → **Variables**: позже `DATABASE_URL`, `JWT_SECRET`
+- Settings → Merge requests: pipeline success + 1 approval (по желанию)
+- Issues / Milestones: `M0 Planning` … `M4 MVP` (см. ROADMAP)
 
 ## Запуск (целевой)
 
