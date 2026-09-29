@@ -1,21 +1,16 @@
+# Stage 0 CI — docs check only.
+# Backend/test/build jobs will be added when backend code exists.
+# If pipeline fails with 0 jobs: enable Shared Runners and/or verify
+# your GitLab.com account (phone) — required for CI minutes on free tier.
+
 stages:
   - lint
-  - test
-  - build
-  - deploy
-
-workflow:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-# --- Stage 0: docs only (must stay green) --------------------------------
 
 lint:docs:
   stage: lint
   image: alpine:3.20
   script:
-    - echo "Checking required docs exist"
+    - echo "Stage 0: checking docs"
     - test -f README.md
     - test -f ROADMAP.md
     - test -f CONTRIBUTING.md
@@ -23,73 +18,4 @@ lint:docs:
     - test -f docs/domain.md
     - test -f docs/api.md
     - test -f docs/setup.md
-
-# --- Later: only when backend files exist --------------------------------
-
-lint:backend:
-  stage: lint
-  image: python:3.12-slim
-  script:
-    - pip install ruff
-    - ruff check backend
-  rules:
-    - exists:
-        - backend/pyproject.toml
-        - backend/requirements.txt
-
-test:backend:
-  stage: test
-  image: python:3.12-slim
-  services:
-    - name: postgres:16-alpine
-      alias: postgres
-  variables:
-    POSTGRES_DB: market
-    POSTGRES_USER: market
-    POSTGRES_PASSWORD: market
-    DATABASE_URL: "postgresql+psycopg://market:market@postgres:5432/market"
-    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  cache:
-    paths:
-      - .cache/pip
-  script:
-    - pip install -r backend/requirements.txt
-    - cd backend && pytest -q
-  rules:
-    - exists:
-        - backend/requirements.txt
-
-build:image:
-  stage: build
-  image: docker:27
-  services:
-    - name: docker:27-dind
-      alias: docker
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_VERIFY: "1"
-    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
-  script:
-    - docker info
-    - docker build -t "$CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHORT_SHA" backend
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      exists:
-        - backend/Dockerfile
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      exists:
-        - backend/Dockerfile
-
-deploy:staging:
-  stage: deploy
-  image: alpine:3.20
-  script:
-    - echo "Staging deploy — configure on stage 1+"
-    - echo "Image tag would be $CI_COMMIT_SHORT_SHA"
-  environment:
-    name: staging
-    action: start
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      when: manual
+    - echo "OK"
