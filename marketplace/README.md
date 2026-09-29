@@ -36,6 +36,7 @@
 | Документ | Содержание |
 |----------|------------|
 | [ROADMAP.md](./ROADMAP.md) | этапы, даты-ориентиры, DoD |
+| [docs/TEAM.md](./docs/TEAM.md) | роли A/B, как брать задачи, стартовый бэклог |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | ветки, MR, commit-сообщения, ревью |
 | [docs/architecture.md](./docs/architecture.md) | модули, потоки, границы |
 | [docs/domain.md](./docs/domain.md) | сущности, инварианты, сценарии |
@@ -162,12 +163,21 @@ issue → feature branch → Merge Request → CI (lint/test) → review → mer
 
 ## Команда и роли
 
+Подробно: [docs/TEAM.md](./docs/TEAM.md) — кто чем занимается, как брать issue, стартовый бэклог.
+
 | Роль | Фокус |
 |------|--------|
-| Backend core | схема БД, trading/wallet, тесты гонок, CI |
-| Fullstack / UI | auth UI, каталог, инвентарь, история, DX |
+| **A — Backend** | схема БД, trading/wallet, тесты гонок, CI |
+| **B — Fullstack / UI** | auth UI, каталог, инвентарь, история, DX |
 
 В первую неделю вместе: **схема БД + OpenAPI-контракт**.
+
+Засеять labels + issues в GitLab (нужен токен с правом Issues):
+
+```bash
+export GITLAB_TOKEN=glpat-...
+./scripts/seed-gitlab-board.sh
+```
 
 ---
 
