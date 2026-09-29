@@ -101,7 +101,13 @@ docker compose up -d --build
 # frontend: http://localhost:3000
 ```
 
-Подробности: [docs/setup.md](./docs/setup.md).
+Подробности и перенос на GitLab: [docs/setup.md](./docs/setup.md).
+
+Быстрый пуш содержимого этой папки как корня GitLab-репо:
+
+```bash
+./scripts/push-to-gitlab.sh git@gitlab.com:<group>/<project>.git
+```
 
 ---
 
